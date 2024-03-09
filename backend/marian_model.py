@@ -25,14 +25,14 @@ def handle_translation():
     src_text = request_data.get('src_text', '')
     # if no input default is english
     src_lang = request_data.get('src_lang', 'en') 
-    tgt_lang = request_data.get('tgt_lang', 'fr') 
+    tgt_lang = request_data.get('tgt_lang', 'en') 
 
     # runs translated function and returns the translated text
     if src_lang != tgt_lang:
         translated = translate(src_text, src_lang, tgt_lang)
     else:
         translated = src_text
-        
+
     return jsonify({'translation': translated})
 
 if __name__ == "__main__": 
