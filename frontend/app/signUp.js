@@ -19,13 +19,13 @@ export default function SignUp() {
     const profileRef = useRef("");
 
     const handleRegister = async ()=>{
-        if(!emailRef.current || !passwordRef.current || !usernameRef.current || !profileRef.current){
+        if(!emailRef.current || !passwordRef.current || !usernameRef.current){
             Alert.alert('Sign Up', "Please fill all the fields!");
             return;
         }
         setLoading(true);
 
-        let response = await register(emailRef.current, passwordRef.current, usernameRef.current, profileRef.current);
+        let response = await register(emailRef.current, passwordRef.current, usernameRef.current);
         setLoading(false);
 
         console.log('got result: ', response);
@@ -80,7 +80,7 @@ export default function SignUp() {
                     />
                 </View>
 
-                <View style={{height: hp(7)}} className="flex-row gap-4 px-4 bg-neutral-100 items-center rounded-xl">
+                {/* <View style={{height: hp(7)}} className="flex-row gap-4 px-4 bg-neutral-100 items-center rounded-xl">
                     <Feather name="image" size={hp(2.7)} color="gray" />
                     <TextInput
                         onChangeText={value=> profileRef.current=value}
@@ -89,7 +89,7 @@ export default function SignUp() {
                         placeholder='Profile url'
                         placeholderTextColor={'gray'}
                     />
-                </View>
+                </View> */}
                     
 
                 {/* submit button */}
@@ -101,7 +101,7 @@ export default function SignUp() {
                                 <Loading size={hp(6.5)} />
                             </View>
                         ):(
-                            <TouchableOpacity onPress={handleRegister} style={{height: hp(6.5)}} className="bg-indigo-500 rounded-xl justify-center items-center">
+                            <TouchableOpacity onPress={handleRegister} style={{height: hp(6.5)}} className="bg-cyan-750 rounded-xl justify-center items-center">
                                 <Text style={{fontSize: hp(2.7)}} className="text-white font-bold tracking-wider">
                                     Sign Up
                                 </Text>
@@ -117,7 +117,7 @@ export default function SignUp() {
                 <View className="flex-row justify-center">
                     <Text style={{fontSize: hp(1.8)}} className="font-semibold text-neutral-500">Already have an account? </Text>
                     <Pressable onPress={()=> router.push('signIn')}>
-                        <Text style={{fontSize: hp(1.8)}} className="font-bold text-indigo-500">Sign In</Text>
+                        <Text style={{fontSize: hp(1.8)}} className="font-bold text-cyan-750">Sign In</Text>
                     </Pressable>
                     
                 </View>

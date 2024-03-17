@@ -36,7 +36,7 @@ export default function SignIn() {
       <View style={{paddingTop: hp(8), paddingHorizontal: wp(5)}} className="flex-1 gap-12">
         {/* signIn image */}
         <View className="items-center">
-            <Image style={{height: hp(25)}} resizeMode='contain' source={require('../assets/images/login.png')} />
+            <Image style={{height: hp(30)}} resizeMode='contain' source={require('../assets/images/app-logo.png')} />
         </View>
 
 
@@ -78,7 +78,7 @@ export default function SignIn() {
                                 <Loading size={hp(6.5)} />
                             </View>
                         ):(
-                            <TouchableOpacity onPress={handleLogin} style={{height: hp(6.5)}} className="bg-indigo-500 rounded-xl justify-center items-center">
+                            <TouchableOpacity onPress={handleLogin} style={{height: hp(6.5)}} className="bg-cyan-750 rounded-xl justify-center items-center">
                                 <Text style={{fontSize: hp(2.7)}} className="text-white font-bold tracking-wider">
                                     Sign In
                                 </Text>
@@ -94,7 +94,7 @@ export default function SignIn() {
                 <View className="flex-row justify-center">
                     <Text style={{fontSize: hp(1.8)}} className="font-semibold text-neutral-500">Don't have an account? </Text>
                     <Pressable onPress={()=> router.push('signUp')}>
-                        <Text style={{fontSize: hp(1.8)}} className="font-bold text-indigo-500">Sign Up</Text>
+                        <Text style={{fontSize: hp(1.8)}} className="font-bold text-cyan-750">Sign Up</Text>
                     </Pressable>
                     
                 </View>

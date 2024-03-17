@@ -56,15 +56,19 @@ export const AuthContextProvider = ({children})=>{
     }
     const register = async (email, password, username, profileUrl)=>{
         try{
+            const usernameDoc = await getDoc(doc(db, "users", username));
+            if (usernameDoc.exists()) {
+                return { success: false, msg: "This username is already in use" };
+            }
+
             const response = await createUserWithEmailAndPassword(auth, email, password);
             console.log('response.user :', response?.user);
 
             // setUser(response?.user);
             // setIsAuthenticated(true);
 
-            await setDoc(doc(db, "users", response?.user?.uid),{
-                username, 
-                profileUrl,
+            await setDoc(doc(db, "users", username),{
+                username,
                 userId: response?.user?.uid
             });
             return {success: true, data: response?.user};
