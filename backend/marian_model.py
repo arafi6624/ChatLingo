@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from transformers import MarianMTModel, MarianTokenizer
+from langdetect import detect
 
 app = Flask(__name__)
 
@@ -24,7 +25,8 @@ def handle_translation():
     request_data = request.json
     src_text = request_data.get('src_text', '')
     # if no input default is english
-    src_lang = request_data.get('src_lang', 'en') 
+    src_lang = detect(src_text) 
+    print(src_lang)
     tgt_lang = request_data.get('tgt_lang', 'en') 
 
     # runs translated function and returns the translated text
