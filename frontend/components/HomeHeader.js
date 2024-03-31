@@ -15,6 +15,7 @@ import { MenuItem } from './CustomMenuItems';
 import { AntDesign, Feather } from '@expo/vector-icons';
 
 const ios = Platform.OS=='ios';
+
 export default function HomeHeader() {
     const {user, logout} = useAuth();
 

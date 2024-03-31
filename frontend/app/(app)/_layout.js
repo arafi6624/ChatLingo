@@ -12,7 +12,12 @@ export default function _layout() {
                 header: ()=> <HomeHeader />
             }}
         />
-
+        <Stack.Screen
+            name="modal"
+            options={{
+                presentation: 'modal',
+            }}
+        />
     </Stack>
   )
 }

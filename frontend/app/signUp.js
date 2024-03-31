@@ -17,15 +17,16 @@ export default function SignUp() {
     const passwordRef = useRef("");
     const usernameRef = useRef("");
     const profileRef = useRef("");
+    const languageRef = useRef("");
 
     const handleRegister = async ()=>{
-        if(!emailRef.current || !passwordRef.current || !usernameRef.current){
+        if(!emailRef.current || !passwordRef.current || !usernameRef.current || !profileRef.current || !languageRef.current){
             Alert.alert('Sign Up', "Please fill all the fields!");
             return;
         }
         setLoading(true);
 
-        let response = await register(emailRef.current, passwordRef.current, usernameRef.current);
+        let response = await register(emailRef.current, passwordRef.current, usernameRef.current, profileRef.current, languageRef.current);
         setLoading(false);
 
         console.log('got result: ', response);
@@ -80,7 +81,7 @@ export default function SignUp() {
                     />
                 </View>
 
-                {/* <View style={{height: hp(7)}} className="flex-row gap-4 px-4 bg-neutral-100 items-center rounded-xl">
+                <View style={{height: hp(7)}} className="flex-row gap-4 px-4 bg-neutral-100 items-center rounded-xl">
                     <Feather name="image" size={hp(2.7)} color="gray" />
                     <TextInput
                         onChangeText={value=> profileRef.current=value}
@@ -89,7 +90,18 @@ export default function SignUp() {
                         placeholder='Profile url'
                         placeholderTextColor={'gray'}
                     />
-                </View> */}
+                </View>
+
+                <View style={{height: hp(7)}} className="flex-row gap-4 px-4 bg-neutral-100 items-center rounded-xl">
+                    <Feather name="image" size={hp(2.7)} color="gray" />
+                    <TextInput
+                        onChangeText={value=> languageRef.current=value}
+                        style={{fontSize: hp(2)}}
+                        className="flex-1 font-semibold text-neutral-700"
+                        placeholder='Language Preference'
+                        placeholderTextColor={'gray'}
+                    />
+                </View>
                     
 
                 {/* submit button */}

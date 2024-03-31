@@ -7,6 +7,7 @@ import ChatList from '../../components/ChatList';
 import Loading from '../../components/Loading';
 import { getDocs, query, where } from 'firebase/firestore';
 import { usersRef } from '../../firebaseConfig';
+import { Link } from 'expo-router';
 
 export default function Home() {
     const {logout, user} = useAuth();
@@ -41,6 +42,10 @@ export default function Home() {
             </View>
         )
       }
+
+      {/* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Link href="/modal">Add User</Link>
+      </View> */}
       
     </View>
   )

@@ -54,7 +54,7 @@ export const AuthContextProvider = ({children})=>{
             return {success: false, msg: e.message, error: e};
         }
     }
-    const register = async (email, password, username, profileUrl)=>{
+    const register = async (email, password, username, profileUrl, language)=>{
         try{
             const usernameDoc = await getDoc(doc(db, "users", username));
             if (usernameDoc.exists()) {
@@ -69,7 +69,9 @@ export const AuthContextProvider = ({children})=>{
 
             await setDoc(doc(db, "users", username),{
                 username,
-                userId: response?.user?.uid
+                userId: response?.user?.uid,
+                profileUrl,
+                language,
             });
             return {success: true, data: response?.user};
         }catch(e){
