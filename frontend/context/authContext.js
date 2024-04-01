@@ -67,11 +67,11 @@ export const AuthContextProvider = ({children})=>{
             // setUser(response?.user);
             // setIsAuthenticated(true);
 
-            await setDoc(doc(db, "users", username),{
-                username,
+            await setDoc(doc(db, "users", response?.user?.uid),{
+                username: username,
                 userId: response?.user?.uid,
-                profileUrl,
-                language,
+                profileUrl: profileUrl,
+                language: language,
             });
             return {success: true, data: response?.user};
         }catch(e){
