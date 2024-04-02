@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from transformers import MarianMTModel, MarianTokenizer
-from langdetect import detect
+
+# TODO: Change to production deployment to use on server (WSGI Server)
 
 app = Flask(__name__)
 
@@ -25,9 +26,9 @@ def handle_translation():
     request_data = request.json
     src_text = request_data.get('src_text', '')
     # if no input default is english
-    src_lang = detect(src_text) 
-    print(src_lang)
-    tgt_lang = request_data.get('tgt_lang', 'en') 
+    src_lang = request_data.get('src_lang', 'en')
+    tgt_lang = request_data.get('tgt_lang', 'en')
+    print(src_text)
 
     # runs translated function and returns the translated text
     if src_lang != tgt_lang:
@@ -38,7 +39,7 @@ def handle_translation():
     return jsonify({'translation': translated})
 
 if __name__ == "__main__": 
-    app.run(debug=True)
+    app.run(host='0.0.0.0')
     # for testing model
     # src_lang = "en"
     # tgt_lang = "fr"
