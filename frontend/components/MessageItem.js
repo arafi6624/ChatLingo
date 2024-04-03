@@ -15,7 +15,7 @@ export default function MessageItem({message, currentUser}) {
 
   const translateMessage = async (message) => {
     try {
-      const response = await axios.post('http://192.168.1.133:5000/translate', {
+      const response = await axios.post('http://192.168.137.221:5000/translate', {
         src_text: message,
         // TODO: store languages as language codes in firebase then update src_lang and tgt_lang
         src_lang: 'en',
