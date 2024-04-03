@@ -38,6 +38,10 @@ def handle_translation():
 
     return jsonify({'translation': translated})
 
+@app.route('/')
+def welcome():
+    return "Flask app is deployed"
+
 if __name__ == "__main__": 
     app.run(host='0.0.0.0')
     # for testing model
