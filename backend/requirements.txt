@@ -3,7 +3,3 @@ huggingface-hub==0.20.3
 sentencepiece==0.1.99
 tokenizers==0.15.1
 transformers==4.37.2
-pytorch==2.2.2
-torchvision==0.17.2
-torchaudio==2.2.2
-pytorch-cuda==12.1
