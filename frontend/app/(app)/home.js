@@ -28,6 +28,7 @@ export default function Home() {
 
         setUsers(data);
     }
+    
   return (
     <View className="flex-1 bg-white">
       <StatusBar style="light" />

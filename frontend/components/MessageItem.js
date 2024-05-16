@@ -1,13 +1,19 @@
 import { View, Text } from 'react-native'
 import React, {useEffect, useState} from 'react'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { useAuth } from '../context/authContext'
 import axios from 'axios'
+import { auth, db } from "../firebaseConfig";
+import { doc, getDoc } from 'firebase/firestore'
 
 export default function MessageItem({message, currentUser}) {
   
   const [translatedMessage, setTranslatedMessage] = useState('');
+  const { user } = useAuth();
+  const [languageCode, setLanguageCode] = useState('');
 
   useEffect(() => {
+    getLanguageCode();
     if (currentUser?.userId !== message?.userId) {
       translateMessage(message.text);
     }
@@ -18,12 +24,22 @@ export default function MessageItem({message, currentUser}) {
       const response = await axios.post('http://192.168.0.165:5000/translate', {
         src_text: message,
         // TODO: store languages as language codes in firebase then update src_lang and tgt_lang
-        src_lang: 'en',
-        tgt_lang: 'fr',
+        src_lang: user.language,
+        tgt_lang: languageCode,
       });
       setTranslatedMessage(response.data.translation);
     } catch (error) {
       console.error('Error translating message:', error);
+    }
+  };
+
+  // Function to fetch user data from Firestore
+  const getLanguageCode = async () => {
+    const docRef = doc(db, 'users', message?.userId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      let data = docSnap.data();
+      setLanguageCode(data.language);
     }
   };
 
