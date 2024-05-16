@@ -8,6 +8,8 @@ app = Flask(__name__)
 def translate(src_text, src, tgt):
     # sets up the model and tokenizer
     model_name = "Helsinki-NLP/opus-mt-" + src + "-" + tgt
+    print(model_name)
+
     tokenizer = MarianTokenizer.from_pretrained(model_name)
     # print(tokenizer.supported_language_codes)
     model = MarianMTModel.from_pretrained(model_name)
@@ -29,6 +31,8 @@ def handle_translation():
     src_lang = request_data.get('src_lang', 'en')
     tgt_lang = request_data.get('tgt_lang', 'en')
     print(src_text)
+    print(src_lang)
+    print(tgt_lang)
 
     # runs translated function and returns the translated text
     if src_lang != tgt_lang:

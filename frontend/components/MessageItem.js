@@ -13,19 +13,17 @@ export default function MessageItem({message, currentUser}) {
   const [languageCode, setLanguageCode] = useState('');
 
   useEffect(() => {
-    getLanguageCode();
     if (currentUser?.userId !== message?.userId) {
-      translateMessage(message.text);
+      getLanguageCodeAndTranslate();
     }
   }, [currentUser, message]);
 
-  const translateMessage = async (message) => {
+  const translateMessage = async (message, src_language) => {
     try {
-      const response = await axios.post('http://192.168.0.165:5000/translate', {
+      const response = await axios.post('http://192.168.1.138:5000/translate', {
         src_text: message,
-        // TODO: store languages as language codes in firebase then update src_lang and tgt_lang
-        src_lang: user.language,
-        tgt_lang: languageCode,
+        src_lang: src_language,
+        tgt_lang: user.language,
       });
       setTranslatedMessage(response.data.translation);
     } catch (error) {
@@ -34,12 +32,13 @@ export default function MessageItem({message, currentUser}) {
   };
 
   // Function to fetch user data from Firestore
-  const getLanguageCode = async () => {
+  const getLanguageCodeAndTranslate = async () => {
     const docRef = doc(db, 'users', message?.userId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       let data = docSnap.data();
       setLanguageCode(data.language);
+      translateMessage(message.text, data.language)
     }
   };
 
